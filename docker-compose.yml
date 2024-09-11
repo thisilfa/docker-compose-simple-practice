@@ -1,0 +1,29 @@
+services:
+  backend:
+    image: flask-app:v1
+    ports:
+      - "2020:2020"
+    environment:
+      - DB_HOST=192.168.190.111
+      - DB_USER=root
+      - DB_PASSWORD=123456
+      - DB_NAME=mtzi_dev
+    networks:
+      docker_network:
+        ipv4_address: 192.168.15.10
+
+  frontend:
+    image: web-app:v1
+    ports:
+      - "8080:80"
+    environment:
+      - API_BASE_URL=http://192.168.15.10:2020
+    depends_on:
+      - backend
+    networks:
+      docker_network:
+        ipv4_address: 192.168.15.17
+
+networks:
+  docker_network:
+    external: true
