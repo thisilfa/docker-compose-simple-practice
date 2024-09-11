@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.API_BASE_URL = "{{API_BASE_URL}}";
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Add a New Item</h3>
+        <form id="itemForm">
+            <label for="thing">Thing:</label>
+            <input type="text" id="thing" name="thing" required>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" step="0.1" required>
+
+            <button type="submit">Add Item</button>
+        </form>
+
+        <br>
+        <br>
+
+        <h3>Delete an Item</h3>
+        <form id="deleteForm">
+            <label for="item_id">Item ID:</label>
+            <input type="number" id="item_id" name="item_id" required>
+
+            <button type="submit">Delete Item</button>
+        </form>
+
+        <div id="responseMessage"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
