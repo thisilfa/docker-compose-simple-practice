@@ -1,4 +1,4 @@
-import yaml
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sqlalchemy import create_engine, text
@@ -6,16 +6,15 @@ from sqlalchemy import create_engine, text
 app = Flask(__name__)
 CORS(app)
 
-# Function to load the database configuration from a YAML file
 def load_db_config():
-    with open('config.yaml', 'r') as file:
-        config = yaml.safe_load(file)
-    return config['db_conn']
+    return {
+        'host': os.getenv('DB_HOST', ''),
+        'user': os.getenv('DB_USER', ''),
+        'password': os.getenv('DB_PASSWORD', ''),
+        'database': os.getenv('DB_NAME', '')
+    }
 
-# Load the database configuration
 db_config = load_db_config()
-
-# Database configuration using SQLAlchemy's create_engine
 DATABASE_URI = f"mysql+pymysql://{db_config['user']}:{db_config['password']}@{db_config['host']}/{db_config['database']}"
 engine = create_engine(DATABASE_URI)
 
